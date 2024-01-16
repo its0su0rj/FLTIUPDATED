@@ -349,21 +349,6 @@ def ml_model_page():
 
         st.success(f'Predicted Salary CTC: {float(diagnosis):.2f} Lacs' if isinstance(diagnosis, (int, float)) else diagnosis)
 
-        
-
-# Function for Feedback Page
-def feedback_page():
-    st.title("Feedback Page")
-    st.write("You can contact me here:")
-    st.write("Email - surajkumar@bhu.ac.in")
-    st.write("For face to face meeting - Dalmia hostel, BHU")
-
-    st.write("Or you can submit your feedback here:")
-    feedback = st.text_area("Feedback")
-    if st.button("Submit Feedback"):
-        # Add logic to save feedback
-        st.success("Thank you for your valuable time!")
-
 # Function for FLTI Page
 @st.cache(allow_output_mutation=True)
 def get_base64_of_bin_file(bin_file):
@@ -382,9 +367,25 @@ def set_png_as_page_bg(png_file):
     </style>
     '''
     st.markdown(page_bg_img, unsafe_allow_html=True)
+        
+
+# Function for Feedback Page
+def feedback_page():
+    set_png_as_page_bg('feedback.png')  
+    st.title("Feedback Page")
+    st.write("You can contact me here:")
+    st.write("Email - surajkumar@bhu.ac.in")
+    st.write("For face to face meeting - Dalmia hostel, BHU")
+
+    st.write("Or you can submit your feedback here:")
+    feedback = st.text_area("Feedback")
+    if st.button("Submit Feedback"):
+        # Add logic to save feedback
+        st.success("Thank you for your valuable time!")
+
 
 def flti_page():
-    set_png_as_page_bg('back1.png')  # Replace 'background.png' with your image file
+    set_png_as_page_bg('flti.png')  # Replace 'background.png' with your image file
     
     # Set the title with a specific text color
     st.markdown("<h1 style='color: #ff5733;'>FLTI</h1>", unsafe_allow_html=True)
@@ -413,6 +414,7 @@ def flti_page():
 
 # Add authentication logic for the User page
 def user_page():
+    set_png_as_page_bg('login.png')  
     st.title("User Page")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
@@ -427,7 +429,7 @@ def main():
     with st.sidebar:
         selected = option_menu('select one',
                                ['FLTI', 'ML Model', 'User','Feedback'],
-                               icons=[':books:','activity', 'currency-rupee', 'emoji-heart-eyes'],
+                               icons=['books','activity', 'heart', 'emoji-heart-eyes'],
                                default_index=0)
     if selected == "FLTI":
         flti_page()
