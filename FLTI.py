@@ -111,10 +111,13 @@ def image_compression(input_image):
     return compressed_image
 
 # Function for College Admission Probability
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
+# Function to predict college admission probability
 def college_admission_probability(input_data):
     # Load the trained model for college admission probability
-    model_college_admission = joblib.load('admission.joblib')
+    model_college_admission = joblib.load('admission_probability_model.joblib')
     scaler = joblib.load('scalerad.joblib')
     
     # Standardize the features using the same scaler used during training
@@ -124,13 +127,9 @@ def college_admission_probability(input_data):
     raw_prediction = model_college_admission.predict(input_data_scaled)
     
     # Apply sigmoid activation to get a probability-like output
-    predicted_admission_probability = 1 / (1 + np.exp(-raw_prediction))
+    predicted_admission_probability = sigmoid(raw_prediction)
 
     return predicted_admission_probability[0]
-
-# ... (previous code)
-
-
 # Modify the ml_model_page function to include the new functions
 @st.cache(allow_output_mutation=True)
 def get_base64_of_bin_file(bin_file):
@@ -305,24 +304,14 @@ def ml_model_page():
         
         # Create a DataFrame with the input data
         input_df = pd.DataFrame(new_data)
-        
-        # Make predictions using the college admission probability model
-        predicted_admission_probability = college_admission_probability(input_df)
-        
-        # Display the predicted admission probability
         if st.button("Percentage Probability to Join the College"):
-            st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
-
-     # Create a DataFrame with the input data
-        #input_df = pd.DataFrame(new_data)
-
-        # Make predictions using the college admission probability model
-        #predicted_admission_probability = college_admission_probability(input_df)
-
-        # Display the predicted admission probability
-        #if st.button("Percentage Probability to Join the College"):
-            #st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
-
+            # Make predictions using the college admission probability model
+            predicted_admission_probability = college_admission_probability(input_df)
+            
+            # Display the predicted admission probability
+            st.write(f"Predicted Admission Probability: {predicted_admission_probability[0]:.2%}")
+                
+        
     elif selected_tab == "Diabetes Prediction":
         st.write("You are on the Diabetes Prediction page.")
         # Add specific content for Diabetes Prediction
