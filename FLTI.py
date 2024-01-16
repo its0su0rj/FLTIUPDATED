@@ -1,4 +1,5 @@
 import streamlit as st
+import base64
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import joblib
@@ -354,7 +355,7 @@ def ml_model_page():
 def feedback_page():
     st.title("Feedback Page")
     st.write("You can contact me here:")
-    st.write("Email - my12345@gmail.com")
+    st.write("Email - surajkuma@bhu.ac.in")
     st.write("For face to face meeting - Dalmia hostel, BHU")
 
     st.write("Or you can submit your feedback here:")
@@ -364,10 +365,30 @@ def feedback_page():
         st.success("Thank you for your valuable time!")
 
 # Function for FLTI Page
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_png_as_page_bg(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = f'''
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{bin_str}");
+        background-size: cover;
+    }}
+    </style>
+    '''
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
 def flti_page():
+    set_png_as_page_bg('back.png')  # Replace 'background.png' with your image file
     st.title("FLTI")
     st.write("From Learning to Implementation")
-    
+
+
 # Add authentication logic for the User page
 def user_page():
     st.title("User Page")
