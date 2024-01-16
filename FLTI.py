@@ -4,6 +4,8 @@ from sklearn.preprocessing import LabelEncoder
 import joblib
 import nltk
 from nltk.corpus import stopwords
+from io import BytesIO
+
 
 import numpy as np
 from PIL import Image
