@@ -299,14 +299,30 @@ def ml_model_page():
             'Girls_Boys_Ratio_Percentage': [girls_boys_ratio_percentage],
         }
      # Create a DataFrame with the input data
-        input_df = pd.DataFrame(new_data)
+        #input_df = pd.DataFrame(new_data)
 
         # Make predictions using the college admission probability model
-        predicted_admission_probability = college_admission_probability(input_df)
+        #predicted_admission_probability = college_admission_probability(input_df)
 
         # Display the predicted admission probability
-        if st.button("Percentage Probability to Join the College"):
+        #if st.button("Percentage Probability to Join the College"):
             st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
+
+       
+        input_df = pd.DataFrame(new_data)
+        
+        # Standardize the features using the same scaler used during training
+        new_data_scaled = scaler.transform(input_df)
+        predicted_admission_probability = college_admission_probability(new_data_scaled)
+
+        
+        # Button to trigger prediction
+        if st.button("Percentage Probability to Join the College"):
+            # Make predictions using the trained model
+            st.write(f"Input Features (scaled): {new_data_scaled}")
+             #predicted_admission_probability = model.predict(new_data_scaled)
+            
+            st.write(f'Predicted Admission Probability: {predicted_admission_probability[0]}%')
 
 
     elif selected_tab == "Diabetes Prediction":
