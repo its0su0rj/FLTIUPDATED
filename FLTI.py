@@ -372,7 +372,7 @@ def ml_model_page():
 
 # Function for Feedback Page
 def feedback_page():
-    set_png_as_page_bg('feedback.png')  
+    set_png_as_page_bg('feedback1.png')  
     st.title("Feedback Page")
     st.write("You can contact me here:")
     st.write("Email - surajkumar@bhu.ac.in")
@@ -430,7 +430,7 @@ def main():
     with st.sidebar:
         selected = option_menu('select one',
                                ['FLTI', 'ML Model', 'User','Feedback'],
-                               icons=[':sparkles:','activity', 'heart', 'emoji-heart-eyes'],
+                               icons=['star','activity', 'heart', 'emoji-heart-eyes'],
                                default_index=0)
     if selected == "FLTI":
         flti_page()
