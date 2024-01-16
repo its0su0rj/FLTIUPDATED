@@ -385,8 +385,25 @@ def set_png_as_page_bg(png_file):
 
 def flti_page():
     set_png_as_page_bg('back.png')  # Replace 'background.png' with your image file
-    st.title("FLTI")
-    st.write("From Learning to Implementation")
+    
+    # Set the title with a specific text color
+    st.markdown("<h1 style='color: #ff2b2b;'>FLTI</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color: #ff2b2b;'>From Learning to Implementation</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #0000ff;'>[Click on ML-MODEL](#)</p>", unsafe_allow_html=True)
+    
+    # Set the introductory text with a different text color
+    st.markdown("<p style='color: #4287f5;'>Embark on a transformative journey with FLTI, where learning transcends theory into real-world impact. FLTI project seamlessly weaves algorithmic prowess with practical implementation, unlocking a realm of possibilities. Here's a glimpse into the brilliance of FLTI:</p>", unsafe_allow_html=True)
+    
+    # Add a link with blue color
+    #st.markdown("<p style='color: #0000ff;'>[Click on ML-MODEL](#)</p>", unsafe_allow_html=True)
+    
+    # Add algorithm details with black color
+    st.markdown("<p style='color: #000000;'><strong>Decision Tree Algo - Loan Approval Prediction:</strong><br>Unleash the power of decision trees to predict loan approval, navigating the intricate web of financial decisions with precision.</p>", unsafe_allow_html=True)
+    
+    # ... (Repeat the process for other algorithm details)
+
+    # Add a line with red color
+    st.markdown("<p style='color: #ff5733;'>its_su_rj</p>", unsafe_allow_html=True)
 
 
 # Add authentication logic for the User page
