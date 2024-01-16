@@ -87,6 +87,7 @@ def email_spam_detection(input_text):
 # ... (previous code)
 
 # Function for Image Compression
+# Function for Image Compression
 def image_compression(input_image):
     # Load the trained model for image compression
     model_image_compression = joblib.load('image.joblib')
@@ -105,9 +106,6 @@ def image_compression(input_image):
     compressed_image = compressed_pixels.reshape(input_image.shape)
 
     return compressed_image
-
-
-# ... (remaining code)
 
 
 # Function for College Admission Probability
@@ -225,6 +223,7 @@ def ml_model_page():
             pixels = image_compression(image).reshape(-1, 3)
         
             # Make predictions on the input data
+            model_image_compression = joblib.load('image.joblib')  # Load the model here
             compressed_pixels = model_image_compression.cluster_centers_[model_image_compression.predict(pixels)]
             compressed_image = compressed_pixels.reshape(image.shape)
     
