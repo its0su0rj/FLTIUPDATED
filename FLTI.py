@@ -380,31 +380,27 @@ def user_page():
 
 
 
-# Main function
 def main():
     st.set_page_config(page_title="Streamlit Web App", page_icon="🌐", layout="wide")
 
-    # Navigation bar
-    navigation_bar = st.sidebar.radio("Navigation", ["FLTI", "ML Model", "User", "Feedback"])
+    # Sidebar navigation
+    selected_tab = st.sidebar.radio("Navigation", ["FLTI", "ML Model", "User", "Feedback"])
+
+    if selected_tab == "FLTI":
+        flti_page()
+    elif selected_tab == "ML Model":
+        ml_model_page()
+    elif selected_tab == "User":
+        user_page()
+    elif selected_tab == "Feedback":
+        feedback_page()
 
     # Create a horizontal layout
     col1, col2 = st.columns(2)
 
     with col1:
-        if navigation_bar == "FLTI":
-            flti_page()
-        elif navigation_bar == "ML Model":
-            ml_model_page()
-        elif navigation_bar == "User":
-            user_page()
-        elif navigation_bar == "Feedback":
-            feedback_page()
-
+        # Content specific to the selected tab can be added here
+        pass
 
 if __name__ == "__main__":
     main()
-
-
-
-
-# ... (remaining code)
