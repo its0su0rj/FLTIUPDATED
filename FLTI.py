@@ -111,18 +111,22 @@ def image_compression(input_image):
     return compressed_image
 
 # Function for College Admission Probability
+
 def college_admission_probability(input_data):
     # Load the trained model for college admission probability
     model_college_admission = joblib.load('admission.joblib')
     scaler = joblib.load('scalerad.joblib')
+    
     # Standardize the features using the same scaler used during training
     input_data_scaled = scaler.transform(input_data)
 
     # Make predictions using the trained model
-    predicted_admission_probability = model_college_admission.predict(input_data_scaled)
+    raw_prediction = model_college_admission.predict(input_data_scaled)
+    
+    # Apply sigmoid activation to get a probability-like output
+    predicted_admission_probability = 1 / (1 + np.exp(-raw_prediction))
 
     return predicted_admission_probability[0]
-
 
 # ... (previous code)
 
@@ -272,7 +276,6 @@ def ml_model_page():
        
         # Streamlit UI
         st.title("College Admission Probability Prediction")
-
         # Input for user to enter data
         all_india_rank = st.number_input("Enter All India Rank:", min_value=1, max_value=1000, step=1)
         nirf_ranking = st.number_input("Enter NIRF Ranking:", min_value=1, max_value=30, step=1)
@@ -284,7 +287,7 @@ def ml_model_page():
         college_fee = st.number_input("Enter College Fee (in lakhs):", min_value=1, max_value=10, step=1)
         living_facilities = st.number_input("Enter Living Facilities (1 to 10):", min_value=1, max_value=10, step=1)
         girls_boys_ratio_percentage = st.number_input("Enter Girls/Boys Ratio Percentage (1 to 100):", min_value=1, max_value=100, step=1)
-
+        
         # Create a DataFrame with the input data
         new_data = {
             'All_India_Rank': [all_india_rank],
@@ -298,6 +301,17 @@ def ml_model_page():
             'Living_Facilities': [living_facilities],
             'Girls_Boys_Ratio_Percentage': [girls_boys_ratio_percentage],
         }
+        
+        # Create a DataFrame with the input data
+        input_df = pd.DataFrame(new_data)
+        
+        # Make predictions using the college admission probability model
+        predicted_admission_probability = college_admission_probability(input_df)
+        
+        # Display the predicted admission probability
+        if st.button("Percentage Probability to Join the College"):
+            st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
+
      # Create a DataFrame with the input data
         #input_df = pd.DataFrame(new_data)
 
@@ -307,24 +321,6 @@ def ml_model_page():
         # Display the predicted admission probability
         #if st.button("Percentage Probability to Join the College"):
             #st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
-
-       
-        input_df = pd.DataFrame(new_data)
-        
-        # Standardize the features using the same scaler used during training
-        new_data_scaled = scaler.transform(input_df)
-        #predicted_admission_probability = college_admission_probability(new_data_scaled)
-
-        
-        # Button to trigger prediction
-        if st.button("Percentage Probability to Join the College"):
-            # Make predictions using the trained model
-            st.write(f"Input Features (scaled): {new_data_scaled}")
-            predicted_admission_probability = college_admission_probability(new_data_scaled)
-             #predicted_admission_probability = model.predict(new_data_scaled)
-            
-            st.write(f'Predicted Admission Probability: {predicted_admission_probability[0]}%')
-
 
     elif selected_tab == "Diabetes Prediction":
         st.write("You are on the Diabetes Prediction page.")
