@@ -304,14 +304,20 @@ def ml_model_page():
         
         # Create a DataFrame with the input data
         input_df = pd.DataFrame(new_data)
+        # ...
+
+        # Button to trigger prediction
         if st.button("Percentage Probability to Join the College"):
             # Make predictions using the college admission probability model
             predicted_admission_probability = college_admission_probability(input_df)
             
             # Display the predicted admission probability
-            st.write(f"Predicted Admission Probability: {predicted_admission_probability[0]:.2%}")
-                
+            if predicted_admission_probability is not None and len(predicted_admission_probability) > 0:
+                st.write(f"Predicted Admission Probability: {predicted_admission_probability[0]:.2%}")
+            else:
+                st.write("Error: Unable to retrieve valid prediction.")
         
+                
     elif selected_tab == "Diabetes Prediction":
         st.write("You are on the Diabetes Prediction page.")
         # Add specific content for Diabetes Prediction
