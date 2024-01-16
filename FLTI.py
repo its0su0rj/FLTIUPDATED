@@ -117,7 +117,7 @@ def sigmoid(x):
 # Function to predict college admission probability
 def college_admission_probability(input_data):
     # Load the trained model for college admission probability
-    model_college_admission = joblib.load('admission_probability_model.joblib')
+    model_college_admission = joblib.load('admission.joblib')
     scaler = joblib.load('scalerad.joblib')
     
     # Standardize the features using the same scaler used during training
@@ -153,7 +153,7 @@ def set_png_as_page_bg(png_file):
 
 
 def ml_model_page():
-    set_png_as_page_bg('model.png') 
+    set_png_as_page_bg('model1.png') 
     st.title("ML Model Page")
     selected_tab = st.selectbox("Select Model", ["Loan Approval Prediction", "Email Spam Detection", "Image Compression", "College Admission Probability", "Diabetes Prediction", "Salary Prediction"])
 
