@@ -153,7 +153,7 @@ def set_png_as_page_bg(png_file):
 
 
 def ml_model_page():
-    set_png_as_page_bg('model1.png') 
+    set_png_as_page_bg('login.png') 
     st.title("ML Model Page")
     selected_tab = st.selectbox("Select Model", ["Loan Approval Prediction", "Email Spam Detection", "Image Compression", "College Admission Probability", "Diabetes Prediction", "Salary Prediction"])
 
