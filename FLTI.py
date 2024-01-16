@@ -306,7 +306,7 @@ def ml_model_page():
 
         # Display the predicted admission probability
         #if st.button("Percentage Probability to Join the College"):
-            st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
+           # st.write(f"Predicted Admission Probability: {predicted_admission_probability:.2%}")
 
        
         input_df = pd.DataFrame(new_data)
