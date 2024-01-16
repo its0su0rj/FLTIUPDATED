@@ -110,7 +110,6 @@ def image_compression(input_image):
 
     return compressed_image
 
-
 # Function for College Admission Probability
 def college_admission_probability(input_data):
     # Load the trained model for college admission probability
@@ -129,9 +128,28 @@ def college_admission_probability(input_data):
 
 
 # Modify the ml_model_page function to include the new functions
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_png_as_page_bg(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = f'''
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{bin_str}");
+        background-size: cover;
+    }}
+    </style>
+    '''
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+        
 
 
 def ml_model_page():
+    set_png_as_page_bg('model.png') 
     st.title("ML Model Page")
     selected_tab = st.selectbox("Select Model", ["Loan Approval Prediction", "Email Spam Detection", "Image Compression", "College Admission Probability", "Diabetes Prediction", "Salary Prediction"])
 
@@ -350,24 +368,7 @@ def ml_model_page():
         st.success(f'Predicted Salary CTC: {float(diagnosis):.2f} Lacs' if isinstance(diagnosis, (int, float)) else diagnosis)
 
 # Function for FLTI Page
-@st.cache(allow_output_mutation=True)
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
 
-def set_png_as_page_bg(png_file):
-    bin_str = get_base64_of_bin_file(png_file)
-    page_bg_img = f'''
-    <style>
-    .stApp {{
-        background-image: url("data:image/png;base64,{bin_str}");
-        background-size: cover;
-    }}
-    </style>
-    '''
-    st.markdown(page_bg_img, unsafe_allow_html=True)
-        
 
 # Function for Feedback Page
 def feedback_page():
@@ -395,18 +396,18 @@ def flti_page():
     # Set the introductory text with a different text color
     st.markdown("<p style='color: #4287f5;'>Embark on a transformative journey with FLTI, where learning transcends theory into real-world impact. FLTI project seamlessly weaves algorithmic prowess with practical implementation, unlocking a realm of possibilities. Here's a glimpse into the brilliance of FLTI:</p>", unsafe_allow_html=True)
     
-    # Add algorithm details with yellow color
-    st.markdown("<p style='color: #ffff00;'><strong>Decision Tree Algo - Loan Approval Prediction:</strong><br>Unleash the power of decision trees to predict loan approval, navigating the intricate web of financial decisions with precision.</p>", unsafe_allow_html=True)
+    # Add algorithm details with black color
+    st.markdown("<p style='color: #000000;'><strong>Decision Tree Algo - Loan Approval Prediction:</strong><br>Unleash the power of decision trees to predict loan approval, navigating the intricate web of financial decisions with precision.</p>", unsafe_allow_html=True)
 
-    st.markdown("<p style='color: #ffff00;'><strong>Naive Bayes - Email Spam Detection:</strong><br>Harnessing the simplicity of Naive Bayes, we've created an intelligent shield against inbox intruders, ensuring a spam-free digital sanctuary.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #000000;'><strong>Naive Bayes - Email Spam Detection:</strong><br>Harnessing the simplicity of Naive Bayes, we've created an intelligent shield against inbox intruders, ensuring a spam-free digital sanctuary.</p>", unsafe_allow_html=True)
 
-    st.markdown("<p style='color: #ffff00;'><strong>K-Means Clustering - Image Compression:</strong><br>Witness the magic of K-Means clustering as it compresses images, fusing efficiency with visual excellence in an algorithmic symphony.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #000000;'><strong>K-Means Clustering - Image Compression:</strong><br>Witness the magic of K-Means clustering as it compresses images, fusing efficiency with visual excellence in an algorithmic symphony.</p>", unsafe_allow_html=True)
 
-    st.markdown("<p style='color: #ffff00;'><strong>KNN - College Admission Probability:</strong><br>Paving the way to higher education, KNN crafts a pathway by predicting college admission probabilities, guiding aspiring minds towards success.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #000000;'><strong>KNN - College Admission Probability:</strong><br>Paving the way to higher education, KNN crafts a pathway by predicting college admission probabilities, guiding aspiring minds towards success.</p>", unsafe_allow_html=True)
 
-    st.markdown("<p style='color: #ffff00;'><strong>Support Vector Machine - Diabetes Prediction:</strong><br>In the fight against diabetes, Support Vector Machine emerges as a formidable ally, predicting outcomes with accuracy and contributing to a healthier tomorrow.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #000000;'><strong>Support Vector Machine - Diabetes Prediction:</strong><br>In the fight against diabetes, Support Vector Machine emerges as a formidable ally, predicting outcomes with accuracy and contributing to a healthier tomorrow.</p>", unsafe_allow_html=True)
 
-    st.markdown("<p style='color: #ffff00;'><strong>Multiple Linear Regression - Salary Prediction:</strong><br>Chart your career trajectory with the precision of Multiple Linear Regression, foreseeing salary landscapes and empowering informed career decisions.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #000000;'><strong>Multiple Linear Regression - Salary Prediction:</strong><br>Chart your career trajectory with the precision of Multiple Linear Regression, foreseeing salary landscapes and empowering informed career decisions.</p>", unsafe_allow_html=True)
 
     # Add a line with red color
     st.markdown("<p style='color: #ff5733;'>its_su_rj</p>", unsafe_allow_html=True)
@@ -429,7 +430,7 @@ def main():
     with st.sidebar:
         selected = option_menu('select one',
                                ['FLTI', 'ML Model', 'User','Feedback'],
-                               icons=['books','activity', 'heart', 'emoji-heart-eyes'],
+                               icons=[':sparkles:','activity', 'heart', 'emoji-heart-eyes'],
                                default_index=0)
     if selected == "FLTI":
         flti_page()
