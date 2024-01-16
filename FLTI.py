@@ -149,6 +149,34 @@ def set_png_as_page_bg(png_file):
     </style>
     '''
     st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Function to render the HTML code for the background video
+def render_background_video(video_url):
+    video_html = f"""
+        <style>
+            #myVideo {{
+                position: fixed;
+                right: 0;
+                bottom: 0;
+                min-width: 100%;
+                min-height: 100%;
+            }}
+
+            .content {{
+                position: fixed;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                color: #f1f1f1;
+                width: 100%;
+                padding: 20px;
+            }}
+        </style>
+        <video autoplay muted loop id="myVideo">
+            <source src="{video_url}">
+            Your browser does not support HTML5 video.
+        </video>
+    """
+    st.markdown(video_html, unsafe_allow_html=True)
         
 
 
@@ -399,7 +427,13 @@ def feedback_page():
 
 
 def flti_page():
-    set_png_as_page_bg('flti.png')  # Replace 'background.png' with your image file
+    #set_png_as_page_bg('flti.png')  # Replace 'background.png' with your image file
+    # Replace with the actual video URL
+    video_url = "https://www.shutterstock.com/video/clip-29741683-neuron-cells-firing-off-impulses-brain"
+    
+    # Render background video
+    render_background_video(video_url)
+    
     
     # Set the title with a specific text color
     st.markdown("<h1 style='color: #ff5733;'>FLTI</h1>", unsafe_allow_html=True)
