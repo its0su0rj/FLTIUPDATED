@@ -399,7 +399,7 @@ def flti_page():
     # Set the title with a specific text color
     st.markdown("<h1 style='color: #ff5733;'>FLTI</h1>", unsafe_allow_html=True)
     st.markdown("<h1 style='color: #4287f5;'>From Learning to Implementation</h1>", unsafe_allow_html=True)
-    st.markdown("<h1 style='color: #ff5733;'>open in DARK mode to enjoy its complete features</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #ff5733;'>open in DARK mode to enjoy its complete features</p>", unsafe_allow_html=True)
     st.markdown("<p style='color:  #ff5733;'>[Click on upper left arrow](#)</p>", unsafe_allow_html=True)
     
     st.markdown("<p style='color:  #ff5733;'>[Click on ML-MODEL](#)</p>", unsafe_allow_html=True)
