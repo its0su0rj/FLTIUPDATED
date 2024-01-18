@@ -395,7 +395,7 @@ def feedback_page():
 
 
 def flti_page():
-    #set_png_as_page_bg('flti2.png')  # Replace 'background.png' with your image file
+    set_png_as_page_bg('black.png')  # Replace 'background.png' with your image file
     # Set the title with a specific text color
     st.markdown("<h1 style='color: #ff5733;'>FLTI</h1>", unsafe_allow_html=True)
     st.markdown("<h1 style='color: #4287f5;'>From Learning to Implementation</h1>", unsafe_allow_html=True)
